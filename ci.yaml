@@ -1,0 +1,35 @@
+name: AutoML CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt --prefer-binary
+
+      - name: Run full pipeline
+        run: python pipeline/training_pipeline.py
+
+      - name: Start API and health check
+        run: |
+          uvicorn src.deployment.api:app --port 8000 &
+          sleep 5
+          curl -f http://localhost:8000/health
+
+      - name: Build Docker image
+        run: docker build -t automl-platform .
