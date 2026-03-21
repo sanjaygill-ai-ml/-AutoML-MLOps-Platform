@@ -75,7 +75,7 @@ AUTOML-MLOPS-PLATFORM
 8. 
 ## ▶️ How to Run
 
-### 1. Clone Repository
+ 1. Clone Repository
 git clone https://github.com/YOUR_USERNAME/automl-mlops-platform.git
 cd automl-mlops-platform
 
@@ -102,7 +102,6 @@ http://127.0.0.1:8000/docs
 docker build -t automl-platform .
 docker run -p 8000:8000 automl-platform
 
-
 🧠 What I Learned
 End-to-end ML system design
 MLOps lifecycle
@@ -113,3 +112,4 @@ Model deployment & monitoring
 💼 Author
 Sanjay Gill
 Aspiring Data Scientist | MLOps Engineer
+
